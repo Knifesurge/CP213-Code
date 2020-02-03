@@ -14,6 +14,8 @@
 		<item key="WizardZipFileResourceExportPage1.STORE_CREATE_STRUCTURE_ID" value="true"/>
 		<item key="WizardZipFileResourceExportPage1.STORE_COMPRESS_CONTENTS_ID" value="true"/>
 		<list key="WizardZipFileResourceExportPage1.STORE_DESTINATION_NAMES_ID">
+			<item value="C:\Users\USER 1\OneDrive\Documents\Laurier\Year_Two\Winter\CP213\Assignment_Archives\mill6100_a01.zip"/>
+			<item value="C:\Users\USER 1\OneDrive\Documents\Laurier\Year_Two\Winter\CP213\Lab_Archives\mill6100_l03.zip"/>
 			<item value="C:\Users\USER 1\OneDrive\Documents\Laurier\Year_Two\Winter\CP213\Lab_Archives\mill6100_Lab02.zip"/>
 			<item value="C:\Users\USER 1\OneDrive\Documents\Laurier\Year_Two\Winter\CP213\Lab_Archives\mill6100_Lab01.zip"/>
 		</list>
