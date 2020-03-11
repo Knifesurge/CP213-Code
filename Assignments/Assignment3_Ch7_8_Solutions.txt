@@ -1,0 +1,277 @@
+=============================================================
+7.1 INHERITANCE BASICS
+=============================================================
+-------------------------------------------------------------
+Derived Classes
+-------------------------------------------------------------
+21122:
+public class SavingsAccount extends BankAccount
+{
+	private double interestRate;
+
+	public SavingsAccount(double iRate)
+	{
+		this.interestRate = iRate;	
+	}
+}
+21124:
+public class CameraPhone extends Phone
+{
+	private int imageSize;
+	private int memorySize;
+
+	public CameraPhone(int iSize, int mSize)
+	{
+		this.imageSize = iSize;
+		this.memorySize = mSize;
+	}
+	
+	public int numPictures()
+	{
+		return (memorySize * 1000) / imageSize;	
+	}
+}
+21125:
+public class ApartmentBuilding extends Building
+{
+	private int numFloors;
+	private int unitsPerFloor;
+	private boolean hasElevator;
+	private boolean hasCentralAir;
+	private String managingCompany;
+
+	public ApartmentBuilding(int nFloors, int uPFloor, boolean hElev, boolean hCA, String mComp)
+	{
+		this.numFloors = nFloors;
+		this.unitsPerFloor = uPFloor;
+		this.hasElevator = hElev;
+		this.hasCentralAir = hCA;
+		this.managingCompany = mComp;
+	}
+	
+	public int getTotalUnits()
+	{
+		return this.numFloors * this.unitsPerFloor;
+	}
+	
+	public boolean isLuxuryBuilding()
+	{
+		return this.hasCentralAir &&
+				this.hasElevator &&
+				this.unitsPerFloor <= 2;
+	}
+}
+20947:
+public class ICalculator1 extends ICalculator
+{
+	public int sign()
+	{
+		if (super.getCurrentValue() > 0) return 1;
+		if (super.getCurrentValue() < 0) return -1;
+		else return 0;
+	}
+}
+20948:
+public class ICalculator2 extends ICalculator
+{
+	public int negate()
+	{
+		return -super.getCurrentValue();
+	}
+}
+20791:
+class FancySquare extends Square
+{
+	double getDiagonal()
+	{
+		return side * Math.sqrt(2);	
+	}
+}
+20774:
+public class ReadWrite extends ReadOnly
+{
+	
+	private boolean modified;
+	
+	public ReadWrite(int val)
+	{
+		super(val);
+	}
+	
+	public void setVal(int v) {val = v; modified = true; }
+	
+	public boolean isDirty() { return modified; }
+}
+20750:
+public class CalculatorWithMemory extends Calculator
+{
+	private double memory = 0;
+
+	public void save() { memory = accumulator; }
+	public void recall() { accumulator = memory; }
+	public void clearMemory() { memory = 0; }
+	public double getMemory() { return memory; }	
+}
+20748:
+public class CheckingAccount extends BankAccount
+{
+	private boolean overdraft;
+	
+	public CheckingAccount(String name, boolean oD)
+	{
+		super(name);
+		this.overdraft = oD;
+	}
+
+	public boolean hasOverdraft() { return overdraft; }
+	
+	public boolean clearCheck(double amt)
+	{
+		if (overdraft || (getBalance() > amt))
+		{
+			withdraw(amt);
+			return true;
+		} else
+			return false;
+	}
+}
+20752:
+public class HighSchoolStudent extends Student
+{
+	public HighSchoolStudent(String school)
+	{
+		super(school);
+	}
+	
+	public String toString()
+	{
+		return "high school " + super.toString();
+	}
+}
+21116:
+AlphaChannelColor acc = new AlphaChannelColor();
+System.out.println(acc.getRed() + " " + acc.getGreen() + " " + acc.getBlue());
+21117:
+public void dissolve()
+{
+	setRed(getRed() + 1);
+	setGreen(getGreen() + 1);
+	setBlue(getBlue() + 1);
+	alpha += 1;	
+}
+-------------------------------------------------------------
+Overriding Method Definitions
+-------------------------------------------------------------
+_____________________________________________________________
+Calling an Overridden Method
+_____________________________________________________________
+21118:
+@Override
+public String getColorName()
+{
+	String colorName = super.getColorName();
+	StringBuilder build = new StringBuilder();
+	if (alpha < 100)
+		build.append("opaque ");
+	else if (alpha < 200)
+		build.append("semi-transparent ");
+	else
+		build.append("transparent ");
+		
+	if (colorName == null)
+		build.append("color");
+	else
+		build.append(colorName);
+		
+	return build.toString();
+}
+21130:
+@Override
+public int getAvailable()
+{
+	return super.getAvailable() + overdraftLimit - overdraftAmount;	
+}
+21133:
+@Override
+public int getRequiredEmptySpace()
+{
+	int numOcc = maxOccupantsPerUnit * totalUnits;
+	return super.getRequiredEmptySpace() + numOcc;	
+}
+21131:
+@Override
+public int getClientAreaHeight()
+{
+	return super.getClientAreaHeight() - 2*borderSize;	
+}
+21132:
+@Override
+public void clear()
+{
+	super.clear();
+	album.clear();
+}
+_____________________________________________________________
+Constructors in Derived Classes
+_____________________________________________________________
+20949:
+public class ICalculator3 extends ICalculator
+{
+	@Override
+	public int div(int arg)	
+	{
+		if (arg == 0)
+		{
+			System.out.println("ZERO DIVIDE ATTEMPTED");
+			return super.getCurrentValue();
+		} else
+			return super.div(arg);
+	}
+}
+20751:
+public class LawSchool extends EducationalInstitution
+{
+	public LawSchool()
+	{
+		super(3);	
+	}
+	
+	@Override
+	public String graduationRequirements()
+	{
+		StringBuilder b = new StringBuilder();
+		b.append(super.graduationRequirements());	// Gets the "x years of study"
+		b.append(" and passing the bar");
+		return b.toString();
+	}
+}
+=============================================================
+7.2 PROGRAMMING WITH INHERITANCE
+=============================================================
+-------------------------------------------------------------
+The Class Object
+-------------------------------------------------------------
+21119:
+public String toString()
+{
+	return "#("+red+","+green+","+blue+")";	
+}
+20739:
+public class Book
+{
+	private String title;
+	private String author;
+
+	public Book(String t, String a)
+	{
+		this.title = t;
+		this.author = a;
+	}
+	
+	
+	public String toString()
+	{
+		return String.join("\n", title, author);
+	}
+}
+20740:
