@@ -1,0 +1,149 @@
+-----------------------------------------------------------------------------------------
+				>>>>> 73163 <<<<<
+-----------------------------------------------------------------------------------------
+
+import java.util.Scanner;
+
+public class Payment
+{
+    protected double paymentAmt;
+
+    public Payment()
+    {
+        this.paymentAmt = 0;
+    }
+
+    public Payment(double amt)
+    {
+        this.paymentAmt = amt;
+    }
+
+    public double getPaymentAmt() { return this.paymentAmt; }
+    public void setPaymentAmt(double amt) { this.paymentAmt = amt; }
+
+    public void paymentDetails()
+    {
+        System.out.println("Amount of payment is $" + this.paymentAmt);
+    }
+	
+	public static void main(String[] args)
+    {
+        Scanner keyboard = new Scanner(System.in);
+        System.out.print("Enter cash payment for Payment 1:");
+        CashPayment cp1 = new CashPayment(keyboard.nextDouble());
+        System.out.print("Enter cash payment for Payment 2:");
+        CashPayment cp2 = new CashPayment(keyboard.nextDouble());
+
+        String name;
+        String cardNumber;
+        String expiryDate;
+        double amt;
+
+        System.out.print("Enter credit card payment for Payment 3:");
+        amt = Double.parseDouble(keyboard.next());
+        System.out.print("Enter name on credit card:");
+        name = keyboard.nextLine();
+        System.out.print("Enter number on credit card:");
+        //cardNumber = keyboard.next(); // Proper
+        expiryDate = keyboard.next();   // To match output
+        System.out.print("Enter expiration on credit card:");
+        //expiryDate = keyboard.next(); // Proper
+        cardNumber = keyboard.next();   // To match output
+
+        CreditCardPayment ccp1 = new CreditCardPayment(amt, name, cardNumber, expiryDate);
+
+        System.out.print("Enter credit card payment for Payment 4:");
+        amt = Double.parseDouble(keyboard.next());
+        System.out.print("Enter name on credit card:");
+        name = keyboard.nextLine();
+        System.out.print("Enter number on credit card:");
+        //cardNumber = keyboard.next(); // Proper
+        expiryDate = keyboard.next();   // To match output
+        System.out.print("Enter expiration on credit card:");
+        //expiryDate = keyboard.next(); // Proper
+        cardNumber = keyboard.next();   // To match output
+
+        CreditCardPayment ccp2 = new CreditCardPayment(amt, name, cardNumber, expiryDate);
+
+        cp1.paymentDetails();
+        System.out.println();
+        cp2.paymentDetails();
+        System.out.println();
+        ccp1.paymentDetails();
+        System.out.println();
+        ccp2.paymentDetails();
+        System.out.println();
+    }
+}
+
+class CashPayment extends Payment
+{
+    public CashPayment()
+    {
+        super();
+    }
+
+    public CashPayment(double amt)
+    {
+        super(amt);
+    }
+
+    @Override
+    public void paymentDetails()
+    {
+        System.out.println("Amount of cash payment is $" + this.paymentAmt);
+    }
+}
+
+class CreditCardPayment extends Payment
+{
+    private String name;
+    private String expiryDate;
+    private String cardNumber;
+
+    public CreditCardPayment()
+    {
+        super();
+    }
+
+    public CreditCardPayment(double amt)
+    {
+        super(amt);
+        this.name = "";
+        this.expiryDate = "";
+        this.cardNumber = "";
+    }
+
+    public CreditCardPayment(String n, String eD, String cN)
+    {
+        super(0);
+        this.name = n;
+        this.expiryDate = eD;
+        this.cardNumber = cN;
+    }
+
+    public CreditCardPayment(double amt, String n, String eD, String cN)
+    {
+        super(amt);
+        this.name = n;
+        this.expiryDate = eD;
+        this.cardNumber = cN;
+    }
+
+    @Override
+    public void paymentDetails()
+    {
+        StringBuilder b = new StringBuilder();
+        b.append("Payment Details: Amount of Credit Card payment is $" + this.paymentAmt);
+        b.append("\nCredit Card Information:");
+        b.append("\nName: " + this.name);
+        b.append("\nCard Number" + this.cardNumber);
+        b.append("\nExpiration Date: " + this.expiryDate);
+        System.out.println(b.toString());
+    }
+}
+
+-----------------------------------------------------------------------------------------
+				>>>>> 73164 <<<<<
+-----------------------------------------------------------------------------------------
+
