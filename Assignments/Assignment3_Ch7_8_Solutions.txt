@@ -275,3 +275,151 @@ public class Book
 	}
 }
 20740:
+public class Book 
+{
+	private String title;
+	private String author;
+	private String tableOfContents = "";
+
+	private int nextPage = 1;
+
+	public Book(String t, String a)
+	{
+		this.title = t;
+		this.author = a;
+	}
+	
+	public void addChapter(String title, int numPages)
+	{
+		this.tableOfContents += "\n" + title + "..." + nextPage;
+		nextPage += numPages;
+	}
+	
+	public int getPages()
+	{
+		return this.nextPage - 1;
+	}
+	
+	public String getTableOfContents()
+	{
+		return this.tableOfContents;	
+	}
+	
+	public String toString()
+	{
+		return this.title + "\n" + this.author;	
+	}
+}
+=============================================================
+8.2 ABSTRACT CLASSES
+=============================================================
+21100:
+public abstract void onClicked();
+21101:
+public abstract class DesktopComponent
+{
+	private String type;
+
+	public DesktopComponent(String t)
+	{
+		this.type = t;	
+	}
+	
+	public abstract void onClicked();
+}
+21156:
+public abstract class Window
+{
+	private int width;
+	private int height;
+	
+	public Window(int w, int h)
+	{
+		this.width = w;
+		this.height = h;
+	}
+	
+	public int getWidth() { return this.width; }
+	public int getHeight() { return this.height; }
+	
+	public abstract void paint();
+}
+21157:
+public abstract class Phone
+{
+	private String phoneNumber;
+
+	public Phone(String pN)
+	{
+		this.phoneNumber = pN;	
+	}
+	
+	public abstract boolean createConnection(Network n);
+	public abstract void closeConnection();
+	
+	public String getPhoneNumber() { return this.phoneNumber; }
+	
+	public String toString()
+	{
+		return "#("+this.phoneNumber+")";	
+	}
+	
+}
+21158:
+public abstract class Account
+{
+	private static int nextId = 10001;
+	private int id;
+	private String name;
+
+	public Account(String n)
+	{
+		this.name = n;
+		this.id = nextId++;
+	}
+	
+	public abstract Cash getValue();
+	
+	public int getId() { return this.id; }
+	public String getName() { return this.name; }
+	
+	
+}
+20753:
+public abstract class Vehicle
+{
+	private double maxSpeed;
+	protected double currentSpeed;
+
+	public Vehicle(double mS)
+	{
+		this.maxSpeed = mS;	
+	}
+	
+	public abstract void accelerate();
+	
+	public double getCurrentSpeed() { return this.currentSpeed; }
+	public double getMaxSpeed() { return this.maxSpeed; }
+	
+	public void pedalToTheMetal()
+	{
+		while (this.currentSpeed < this.maxSpeed)
+			accelerate();
+	}
+}
+20754:
+public class ApartmentHouse extends RentableDwelling
+{
+	private int numberOfApartments;
+
+	public ApartmentHouse(double rpu, int num)
+	{
+		super(rpu);
+		this.numberOfApartments = num;
+	}
+	
+	public double getRentalIncome()
+	{
+		return getRentPerUnit() * this.numberOfApartments;	
+	}
+}
